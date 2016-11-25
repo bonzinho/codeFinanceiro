@@ -11,6 +11,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Styles -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href=" {{ asset('css/admin.css')}}" rel="stylesheet">
 
         <!-- Scripts -->
@@ -20,29 +21,20 @@ echo json_encode([
     'csrfToken' => csrf_token(),
 ]);
 ?>
-        </script>
+        </script> 
     </head>
     <body>
-        <div id="app">
-            <header>
-                <!-- Componente VUE.JS admin-menu -->
-                @if (Auth::check()) <!-- Verifica se está autenticado -->
+        <div id="app">        
+            <header>                
+                @if (Auth::check())
                 <?php
                 $menuConfig = [
                     'name' => Auth::user()->name, // vas buscar o nome do utilizador logado, pode ir buscar outro dado qualquer
                     'menus' => [
-                            ['name' => 'Contas a pagar', 'url' => '/teste', 'dropdownId' => 'teste'],
-                            ['name' => 'Contas a receber', 'url' => '/teste1']
+                            ['name' => 'Banco', 'url' => route('admin.banks.index')]
+                            
                     ],
-                    'menusDropdown' => [
-                            [
-                            'id' => 'teste',
-                            'items' => [
-                                    ['name' => "Listar contas", 'url' => '/listar'],
-                                    ['name' => "Criar conta", 'url' => '/criar'],
-                            ]
-                        ]
-                    ],
+                    'menusDropdown' => [],
                     'urlLogout' => env('URL_ADMIN_LOGOUT'),
                     'csrfToken' => csrf_token()
                 ];

@@ -5,3 +5,7 @@
 Homestead.json
 Homestead.yaml
 .env
+/roboto
+resources/assets/spa/js/config.js
+
+

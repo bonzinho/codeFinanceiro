@@ -89,7 +89,7 @@ return [
       | systems in place to revoke the token if necessary.
       |
      */
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => env('JWT_TTL', 1),
     /*
       |--------------------------------------------------------------------------
       | Refresh time to live
@@ -106,7 +106,7 @@ return [
       | systems in place to revoke the token if necessary.
       |
      */
-    'refresh_ttl' => env('JWT_REFRESH_TTL', 20160),
+    'refresh_ttl' => env('JWT_REFRESH_TTL', 1),  //20160
     /*
       |--------------------------------------------------------------------------
       | JWT hashing algorithm

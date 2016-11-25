@@ -28,7 +28,13 @@ Route::get('/', function () {
 
 Route::get('/home', function(){
     return redirect()->route('admin.home');
-});  
+});
+
+
+Route::get('/app', function () {    
+    return view('layouts.spa');
+});
+  
 
 //grupo de rotas de administração com middleware-> can:access-admin
 Route::group([
@@ -37,8 +43,10 @@ Route::group([
     ] , function(){
 
         Auth::routes();
+
         Route::group(['middleware' => 'can:access-admin'], function(){
             Route::get('/home', 'HomeController@index')->name('home');  // foi inserido ao adicionar o nosso auth (apenas postra se for auntenticado)
+            Route::resource('banks', 'Admin\BanksController'); // cria as rotas todas do crud (get, update, set etc)
         });
         
 

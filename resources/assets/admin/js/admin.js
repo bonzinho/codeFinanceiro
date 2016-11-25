@@ -17,5 +17,3 @@ Vue.component('admin-menu', require('./components/adminMenu.vue'));
 const app = new Vue({
     el: '#app'
 });
-
-console.log('teste');

@@ -28,7 +28,7 @@ class User extends Authenticatable implements JWTSubject {
      *
      * @var array
      */
-    protected $hidden = [
+    protected $hidden = [  // podemos incluir os campo que não queremos que sejam enviados na serialização enviado no json
         'password',
         'remember_token',
     ];

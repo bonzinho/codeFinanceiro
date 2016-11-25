@@ -72,7 +72,7 @@ class AuthController extends Controller {
     protected function sendFailedLoginResponse(Request $request) {
         return response()->json([
                     'message' => Lang::get('auth.failed')
-                        ], 401);
+                        ], 400);  // código 400 as credenciais estao invalidas, 401 -> token expirado
     }
 
     /**
