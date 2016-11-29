@@ -3,10 +3,16 @@
 @section('content')
     <div class="container">
         <div class="row">
-            {!! Form::open(['route' => 'admin.banks.store']) !!}
+            <h4>Editar Banco</h4>
+            {!! Form::model($bank, [
+                'route' => ['admin.banks.update', 'bank' => $bank->id],
+                'method' => 'PUT'
+            ]) !!}
+
             @include('admin.banks._form')
+
             <div class="row">
-                {!! Form::submit('Criar banco', ['class' => 'btn waves-effect']) !!}
+                {!! Form::submit('Guardar banco', ['class' => 'btn waves-effect']) !!}
             </div>
             {!! Form::close() !!}            
         </div>

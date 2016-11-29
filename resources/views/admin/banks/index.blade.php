@@ -18,7 +18,29 @@
                     <tr>
                         <td>{{$bank->id}}</td>
                         <td>{{$bank->name}}</td> 
-                        <td>Acções</td>                                              
+                        <td>
+                            <a href="{{route('admin.banks.edit', ['bank' => $bank->id])}}">Editar</a> | 
+                            <delete-action action="{{route('admin.banks.destroy', ['bank' => $bank->id])}}" 
+                                            action-element="link-delete-{{$bank->id}}" csrf-token="{{csrf_token()}}">
+                                <?php $modalId = "modal-delete-$bank->id"; ?>
+                                <a id="link-modal-{{$bank->id}}" 
+                                    href="#{{ $modalId }}">Apagar</a>
+                                    <modal :modal="{{json_encode(['id' => $modalId ])}}" style="display:none;">
+                                        <div slot="content">
+                                            <h4>ATENÇÃO</h4>
+                                            <p><strong>Tem a certeza que pretende excluir este banco?</strong></p>
+                                            <div class="divider"></div>
+                                            <p>Nome: <strong>{{$bank->name}}</strong></p>
+                                            <div class="divider"></div>
+                                        </div>
+                                        <div slot="footer">
+                                            <button class="btn btn-flat waves-effect green lighten-2 modal-close modal-action"
+                                                    id="link-delete-{{$bank->id}}">OK</button>
+                                            <button class="btn btn-flat waves-effect waves-red lighten-2 modal-close modal-action">Cancelar</button>
+                                        </div>
+                                    </modal>
+                            </delete-action>
+                        </td>                                              
                     </tr>  
                 @endforeach            
                 </tbody>

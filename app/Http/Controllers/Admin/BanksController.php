@@ -95,7 +95,7 @@ class BanksController extends Controller
 
         $bank = $this->repository->find($id);
 
-        return view('banks.edit', compact('bank'));
+        return view('admin.banks.edit', compact('bank'));
     }
 
 
@@ -108,37 +108,17 @@ class BanksController extends Controller
      * @return Response
      */
     public function update(BankUpdateRequest $request, $id)
-    {
+    {     
 
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            $bank = $this->repository->update($id, $request->all());
-
-            $response = [
-                'message' => 'Bank updated.',
-                'data'    => $bank->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
+            $this->repository->update($request->all(), $id);           
+            //$bank = $this->repository->update($request->all(), $id);           
+            /*if ($request->wantsJson()) {
 
                 return response()->json($response);
-            }
+            }*/
 
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+            return redirect()->route('admin.banks.index'); 
+        
     }
 
 
@@ -151,16 +131,19 @@ class BanksController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
 
+        echo $id;
+
+        $this->repository->delete($id);
+        /*$deleted = $this->repository->delete($id);
         if (request()->wantsJson()) {
 
             return response()->json([
                 'message' => 'Bank deleted.',
                 'deleted' => $deleted,
             ]);
-        }
+        } */
 
-        return redirect()->back()->with('message', 'Bank deleted.');
+        return redirect()->route('admin.banks.index'); 
     }
 }

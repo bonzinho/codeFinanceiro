@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
+        <h4>Criar Banco</h4>
             {!! Form::open(['route' => 'admin.banks.store']) !!}
             @include('admin.banks._form')
             <div class="row">

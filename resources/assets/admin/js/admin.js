@@ -14,6 +14,8 @@ require('./bootstrap');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('admin-menu', require('./components/adminMenu.vue'));
+Vue.component('delete-action', require('./components/deleteAction.vue'));
+Vue.component('modal', require('../../_default/components/Modal.vue'));
 const app = new Vue({
     el: '#app'
 });

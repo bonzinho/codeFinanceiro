@@ -31,10 +31,35 @@ echo json_encode([
                 $menuConfig = [
                     'name' => Auth::user()->name, // vas buscar o nome do utilizador logado, pode ir buscar outro dado qualquer
                     'menus' => [
-                            ['name' => 'Banco', 'url' => route('admin.banks.index')]
+                            [
+                                'name' => 'Banco', 
+                                'url' => route('admin.banks.index'), 
+                                'active' => isRouteActive('admin.banks.index') // verifica se a rota está ativa ou nao com o helpers.php
+                            ],
+                            [
+                                'name' => 'Contas a pagar',
+                                'dropdownId' => 'teste'
+                            ]
                             
                     ],
-                    'menusDropdown' => [],
+                    'menusDropdown' => [
+                        [
+                            'id' => 'teste',
+                            'items' => [
+                                [
+                                    'name' => 'Banco', 
+                                    'url' => route('admin.banks.index'), 
+                                    'active' => isRouteActive('admin.banks.index') // verifica se a rota está ativa ou nao com o helpers.php
+                                ],
+                                 [
+                                    'name' => 'Banco Edit', 
+                                    'url' => route('admin.banks.index'), 
+                                    'active' => isRouteActive('admin.banks.edit') 
+                                ],
+                            ]
+                        ]
+
+                    ],
                     'urlLogout' => env('URL_ADMIN_LOGOUT'),
                     'csrfToken' => csrf_token()
                 ];
