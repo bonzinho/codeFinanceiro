@@ -1,15 +1,15 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
+  |--------------------------------------------------------------------------
+  | Model Factories
+  |--------------------------------------------------------------------------
+  |
+  | Here you may define all of your model factories. Model factories give
+  | you a convenient way to create models for testing and seeding your
+  | database. Just tell the factory how a default model should look.
+  |
+ */
 
 $factory->define(codeFin\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -24,18 +24,8 @@ $factory->define(codeFin\User::class, function (Faker\Generator $faker) {
 
 
 
-$factory->state(\codeFin\User::class, 'admin', function (Faker\Generator $faker){
-	return [
-		'role' => \codeFin\User::ROLE_ADMIN
-	];
-});
-
-
-$factory->define(codeFin\Models\Bank::class, function (Faker\Generator $faker) {
-    static $password;
-
+$factory->state(\codeFin\User::class, 'admin', function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'logo' => md5(time()).'.jpg',        
+        'role' => \codeFin\User::ROLE_ADMIN
     ];
 });

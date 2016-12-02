@@ -4,15 +4,14 @@ namespace codeFin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BankCreateRequest extends FormRequest
-{
+class BankCreateRequest extends FormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,10 +20,11 @@ class BankCreateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'name' => 'required|max:255',
+            'logo' => 'required|image',
         ];
     }
+
 }
