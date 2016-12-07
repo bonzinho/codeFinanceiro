@@ -2,7 +2,7 @@
 
 namespace codeFin\Http\Controllers\Auth;
 
-use codeFin\User;
+use codeFin\Models\User;
 use Validator;
 use codeFin\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;

@@ -21,6 +21,8 @@ Route::group(['middleware' => 'cors', 'as' => 'api.'], function(){
 
     Route::group(['middleware' => 'auth:api'], function(){
 
+        Route::resource('bank_accounts', 'Api\BankAccountsController', ['except' => ['create', 'edit']]); // cria todas as rotas necessarias de forma automatica o except faz com que não crie as rotas definidas nele, neste caso crete e edit
+
         Route::post('logout', 'Api\AuthController@logout')
             ->middleware('auth:api')->name('logout');
 

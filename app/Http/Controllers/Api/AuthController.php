@@ -3,7 +3,7 @@
 namespace codeFin\Http\Controllers\Api;
 
 use codeFin\Http\Controllers\Controller;
-use codeFin\User;
+use codeFin\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

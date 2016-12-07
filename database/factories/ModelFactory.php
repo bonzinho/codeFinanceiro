@@ -11,7 +11,7 @@
   |
  */
 
-$factory->define(codeFin\User::class, function (Faker\Generator $faker) {
+$factory->define(\codeFin\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -24,8 +24,18 @@ $factory->define(codeFin\User::class, function (Faker\Generator $faker) {
 
 
 
-$factory->state(\codeFin\User::class, 'admin', function (Faker\Generator $faker) {
+$factory->state(\codeFin\Models\User::class, 'admin', function (Faker\Generator $faker) {
     return [
-        'role' => \codeFin\User::ROLE_ADMIN
+        'role' => \codeFin\Models\User::ROLE_ADMIN
+    ];
+});
+
+
+$factory->define(\codeFin\Models\BankAccount::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->city,
+        'agency' => rand(10000, 60000).'-'.rand(0,9),
+        'account' => rand(70000, 260000).'-'.rand(0,9),
     ];
 });

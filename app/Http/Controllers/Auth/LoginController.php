@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     protected function credentials(Request $request) {
         $data = $request->only($this->username(), 'password');
-        $data['role'] = \codeFin\User::ROLE_ADMIN;  // Verifica se o login é um admin, com a constante
+        $data['role'] = \codeFin\Models\User::ROLE_ADMIN;  // Verifica se o login é um admin, com a constante
         return $data;
     }
     

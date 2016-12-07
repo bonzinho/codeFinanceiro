@@ -11,14 +11,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\codeFin\User::class,1)  // user que é administrador
+        factory(\codeFin\Models\User::class,1)  // user que é administrador
         	->states('admin')
         	->create([
         		'name' => 'Vitor Bonzinho',
         		'email' => 'admin@user.com'
         		]);
 
-        factory(\codeFin\User::class,1)  // user que não é cliente apenas          
+        factory(\codeFin\Models\User::class,1)  // user que não é cliente apenas
             ->create([
                 'name' => 'Cliente da Silva',
                 'email' => 'client@user.com'

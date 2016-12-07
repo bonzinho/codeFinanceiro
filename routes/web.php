@@ -1,54 +1,50 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+  |--------------------------------------------------------------------------
+  | Web Routes
+  |--------------------------------------------------------------------------
+  |
+  | This file is where you may define all of the routes that are handled
+  | by your application. Just tell Laravel the URIs it should respond
+  | to using a Closure or controller method. Build something great!
+  |
+ */
 
 
 
-Route::get('/user', function(){
-    
+Route::get('/user', function() {
+
     \Illuminate\Support\Facades\Auth::LoginUsingId(2);
-        
 });
 
-Route::get('/', function () {    
+Route::get('/', function () {
     return view('welcome');
 });
 
 
 
 
-Route::get('/home', function(){
+Route::get('/home', function() {
     return redirect()->route('admin.home');
 });
 
 
-Route::get('/app', function () {    
+Route::get('/app', function () {
     return view('layouts.spa');
 });
-  
+
 
 //grupo de rotas de administração com middleware-> can:access-admin
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.'
-    ] , function(){
+        ], function() {
 
-        Auth::routes();
+    Auth::routes();
 
-        Route::group(['middleware' => 'can:access-admin'], function(){
-            Route::get('/home', 'HomeController@index')->name('home');  // foi inserido ao adicionar o nosso auth (apenas postra se for auntenticado)
-            Route::resource('banks', 'Admin\BanksController'); // cria as rotas todas do crud (get, update, set etc)
-        });
-        
-
-   
+    Route::group(['middleware' => 'can:access-admin'], function() {
+        Route::get('/home', 'HomeController@index')->name('home');  // foi inserido ao adicionar o nosso auth (apenas postra se for auntenticado)
+        Route::resource('banks', 'Admin\BanksController'); // Route::resouces cria as rotas todas do crud (get, update, set etc)
+    });
 });
