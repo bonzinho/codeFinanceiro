@@ -4,11 +4,6 @@ namespace codeFin\Http\Controllers\Api;
 
 use codeFin\Http\Controllers\Controller;
 use codeFin\Http\Controllers\Response;
-use Illuminate\Http\Request;
-
-use codeFin\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use codeFin\Http\Requests\BankAccountCreateRequest;
 use codeFin\Http\Requests\BankAccountUpdateRequest;
 use codeFin\Repositories\BankAccountRepository;
@@ -67,10 +62,7 @@ class BankAccountsController extends Controller
     public function show($id)
     {
         $bankAccount = $this->repository->find($id);
-
         return response()->json($bankAccount->toArray(), 200); // status code 200 OK
-
-
 
     }
 
