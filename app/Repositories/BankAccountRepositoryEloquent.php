@@ -2,6 +2,7 @@
 
 namespace codeFin\Repositories;
 
+use codeFin\Presenters\BankAccountPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use codeFin\Repositories\BankAccountRepository;
@@ -31,5 +32,10 @@ class BankAccountRepositoryEloquent extends BaseRepository implements BankAccoun
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return BankAccountPresenter::class;
     }
 }
