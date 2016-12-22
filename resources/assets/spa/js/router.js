@@ -9,7 +9,7 @@ router.map(routerMap); // faz o mapeamento
 
 //evento //permite que a transição seja capturada antes de ser feita (antes que a rota seja feita passa por aqui)
 router.beforeEach(({to, next}) =>{
-    if(to.auth && !Auth.check()){  // se a transição do to.auth, sendo este o valor que adicionamos nas nossa router.map.js (é possivel ver os valores que temos acesso fazendo um console.log(trasition)) e se o nosso check() for falso, ou seja nao esta logado
+    if(to.auth && !Auth.user.check){
         return router.go({name: 'auth.login'});
     }   
     next(); // caso não entre na condição em cima significa que pode avançar      

@@ -14,6 +14,9 @@ use codeFin\Models\BankAccount;
  */
 class BankAccountRepositoryEloquent extends BaseRepository implements BankAccountRepository
 {
+
+    protected $skipPresenter = false; //se for true desativa o presenter (fractal)
+
     /**
      * Specify Model class name
      *

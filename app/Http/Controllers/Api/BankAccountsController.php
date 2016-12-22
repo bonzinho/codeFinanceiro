@@ -32,7 +32,9 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
-        $bankAccounts = $this->repository->all();
+        //$this->repository->skipPresenter(true); desativar o presenter
+        //$this->repository->setPresenter(meuPresenter::class); esta linha carrega um novo presentert que queiramos usar
+        $bankAccounts = $this->repository->all();  // $bankAccounts = $this->repository->skipPresenter(true)->all(); este comentario desativa o preenter tabem
         return $bankAccounts;
     }
 
@@ -47,7 +49,6 @@ class BankAccountsController extends Controller
     {
         $bankAccount = $this->repository->create($request->all());
         return response()->json($bankAccount, 201); // retorna o array e o estatus code 201 que significa que foi criado
-
     }
 
 
@@ -62,7 +63,6 @@ class BankAccountsController extends Controller
     {
         $bankAccount = $this->repository->find($id);
         return response()->json($bankAccount); // status code 200 OK
-
     }
 
     /**
