@@ -1,7 +1,6 @@
 import LoginComponent from './components/Login.vue';
 import LogoutComponent from './components/Logout.vue';
 import DashboardComponent from './components/Dashboard.vue';
-
 import BankAccountListComponent from './components/bank-account/BankAccountList.vue';
 
 
@@ -18,7 +17,6 @@ export default{
         auth: true // para acessar a esta rota É necessario estar autenticado     
 
     },
-
     '/dashboard':{
         name: 'dashboard',
         component: DashboardComponent,
@@ -30,11 +28,13 @@ export default{
         subRoutes:{
             '/':{
                 name:'bank-account.list',
-                component: BankAccountListComponent
+                component: BankAccountListComponent,
+                //auth:true
             },
             '/:id/update':{
                 name: 'bank-account.update',
-                component: BankAccountListComponent
+                component: BankAccountListComponent,
+                //auth: true
             }
         }
     }

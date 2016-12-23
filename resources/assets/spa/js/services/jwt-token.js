@@ -25,12 +25,13 @@ export default{
         });
     },
     revokeToken(){
-        let afterRevokeToken = () => {
+        let afterRevokeToken = (response) => {
             this.token = null; // limpa o token (função desta pagina)
+            return response;
         }
         return Jwt.logout()
-            .then(afterRevokeToken())
-            .catch(afterRevokeToken());
+            .then(afterRevokeToken)
+            .catch(afterRevokeToken);
     },
     //metodo para envio de tokencom o Bearer
     getAuthorizationHeader(){

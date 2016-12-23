@@ -6,7 +6,7 @@
     </ul>
     <ul id="dropdown-logout" class="dropdown-content">
         <li>
-            <a v-link="{name: 'auth.logout}">Sair</a>
+            <a v-link="">Sair</a>
         </li>
     </ul>
     <div class="navbar-fixed">
@@ -54,7 +54,8 @@
                     },
                 ],
                 menusDropdown:[],
-                user: Auth.user
+                user: Auth.user,
+                logout: Auth.logout,
             }
         },
         computed:{

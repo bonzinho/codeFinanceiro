@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col s8 offset-s2 z-depth-2">
-                <h4 class="center">A sair...</h4>               
+            <div class="card-panel col s8 offset-s2 z-depth-2">
+                <h5 class="center">A sair...</h5>
                 <div class="progress">
                     <div class="indeterminate"></div>
                 </div>
@@ -23,8 +23,8 @@ import Auth from '../services/auth';
             logout(){
                let goToLogin = () => this.$router.go({name: 'auth.login'})
                Auth.logout()
-                    .then(()=>goToLogin()) // se for válido
-                    .catch(() => goToLogin()); // se não
+                    .then(goToLogin)
+                    .catch(goToLogin);
             }
         }
     }

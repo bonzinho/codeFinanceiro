@@ -38,12 +38,14 @@ export default{
         });
     },
     logout(){
-        let afterLogout = () => {
+        let afterLogout = (response) => {
             this.clearAuth(); // limpa o token (função desta pagina)
-        }        
+            return response;
+        };
+
         return JwtToken.revokeToken()
-            .then(afterLogout())
-            .catch(afterLogout());
+            .then(afterLogout)
+            .catch(afterLogout);
     },
     clearAuth(){
         this.user.data = null;

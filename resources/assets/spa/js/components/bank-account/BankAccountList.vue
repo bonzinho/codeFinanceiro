@@ -6,29 +6,32 @@
                     <h5>As minhas contas bancárias</h5>
                 </span>
             </div>
-            <table class="bordered striped highlight responsive-table z-depth-5">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Agência</th>
-                    <th>C/C</th>
-                    <th>Acções</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(index,o) in bankAccounts">
-                    <td>&nbsp;{{ index + 1 }}</td>
-                    <td>{{ o.name }}</td>
-                    <td>{{ o.agency }}</td>
-                    <td>{{ o.account }}</td>
-                    <td>
-                        <a v-link="{ name: 'bank-account.update', params: {id: o.id} }">Editar</a>
-                        <a href="#" @click.prevent="openModalDelete(o)">Apagar</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="card-panel z-depth-5">
+                <table class="bordered striped highlight responsive-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Agência</th>
+                        <th>C/C</th>
+                        <th>Acções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(index,o) in bankAccounts">
+                        <td>&nbsp;{{ index + 1 }}</td>
+                        <td>{{ o.name }}</td>
+                        <td>{{ o.agency }}</td>
+                        <td>{{ o.account }}</td>
+                        <td>
+                            <a v-link="{ name: 'bank-account.update', params: {id: o.id} }">Editar</a>
+                            <a href="#" @click.prevent="openModalDelete(o)">Apagar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <pagination :per-page="10" :total-records="55"></pagination>
+            </div>
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large" href="http://google.pt"></a>
                 <i class="large material-icons">add</i>
@@ -45,19 +48,21 @@
             <p>C/C: <strong>{{ bankAccountToDelete.account }}</strong></p>
             <div class="divider"></div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-flat waves-effect-green lighten-2 modal-close modal-action" @click="destroy()"> OK </button>
-            <button class="btn btn-flat waves-effect waves-red modal-close modal-action"> Cancelar </button>
+        <div slot="footer">
+            <button class="btn btn-flat waves-effect green lighten-2 modal-close modal-action" @click="destroy()">OK</button>
+            <button class="btn btn-flat waves-effect waves-red modal-close modal-action">Cancelar</button>
         </div>
     </modal>
 </template>
 <script>
-    import { BankAccount } from '../../services/resources';
+    import {BankAccount} from '../../services/resources';
     import ModalComponent from '../../../../_default/components/Modal.vue';
+    import PaginationComponent from '../Pagination.vue';
 
     export default{
         components:{
             'modal': ModalComponent,
+            'pagination': PaginationComponent,
         },
         data(){
             return{
@@ -77,7 +82,7 @@
             destroy(){
                 BankAccount.delete({id: this.bankAccountToDelete.id}).then((response) => {
                     this.bankAccounts.$remove(this.bankAccountToDelete);
-                    this.bankAccounttoDelete = null;
+                    this.bankAccountToDelete = null;
                     Materialize.toast('Conta bancária apagada com sucesso!', 4000);
                 });
             },
