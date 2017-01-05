@@ -15,7 +15,6 @@ class CreateBanksData extends Migration {
 
         /** @var codeFin\Repositories\BankRepository $repository */
         $repository = app(BankRepository::class); //helper app, para passar o serviço que o laravel gere
-
         foreach ($this->getData() as $bankArray) {
             $repository->create($bankArray);
             sleep(1); // faz com que o feech espera um segundo ate ao proximo registo
@@ -28,7 +27,15 @@ class CreateBanksData extends Migration {
      * @return void
      */
     public function down() {
-        //
+        $repository = app(\codeFin\Repositories\BankRepository::class);
+        $repository->skipPresenter(true);
+        $count = count($this->getData());
+        foreach (range(1, $count) as $value){
+            $model = $repository->find($value);
+            $path = \codeFin\Models\Bank::logosDir() . '/' . $model->logo; // caminho para excluir imagem
+            \Storage::disk('public')->delete($path);
+            $model->delete();
+        }
     }
 
     //lista de bancos padrão

@@ -88,7 +88,7 @@ elixir(mix => {
             .sass('./resources/assets/spa/sass/spa.scss')
             .copy('./node_modules/materialize-css/fonts/roboto', './public/fonts/roboto'); // copias a fonts para a pasta publica de fonts
 
-    gulp.start('spa-config', 'webpack-dev-server'); //roda as tarefas definidas em cona (spa-config e webpack-dev-server)
+    gulp.start('spa-config', 'webpack-dev-server'); //roda as tarefas definidas em cima (spa-config e webpack-dev-server)
 
     mix.browserSync({
         host: HOST,

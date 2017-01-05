@@ -2,6 +2,8 @@
 
 namespace codeFin\Http\Controllers\Api;
 
+use codeFin\Criteria\FindByLikeAgencyCriteria;
+use codeFin\Criteria\FindByNameCriteria;
 use codeFin\Http\Controllers\Controller;
 use codeFin\Http\Controllers\Response;
 use codeFin\Http\Requests\BankAccountCreateRequest;
@@ -32,9 +34,8 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
-        //$this->repository->skipPresenter(true); desativar o presenter
-        //$this->repository->setPresenter(meuPresenter::class); esta linha carrega um novo presentert que queiramos usar
-        $bankAccounts = $this->repository->all();  // $bankAccounts = $this->repository->skipPresenter(true)->all(); este comentario desativa o preenter tabem
+        
+        $bankAccounts = $this->repository->paginate();
         return $bankAccounts;
     }
 

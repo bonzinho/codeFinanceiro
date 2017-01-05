@@ -15,6 +15,14 @@ use codeFin\Models\BankAccount;
 class BankAccountRepositoryEloquent extends BaseRepository implements BankAccountRepository
 {
 
+    // atribui quais os campos que podem ser pesquisados
+    protected $fieldSearchable = [
+        'name' => 'like',
+        'agency' => 'like',
+        'account' => 'like',
+        'bank.name' => 'like',
+    ];
+
     protected $skipPresenter = false; //se for true desativa o presenter (fractal)
 
     /**

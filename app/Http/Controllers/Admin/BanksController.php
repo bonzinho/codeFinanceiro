@@ -23,6 +23,7 @@ class BanksController extends Controller {
 
     public function __construct(BankRepository $repository) { // remoer sempre , BankValidator $validator
         $this->repository = $repository;
+        $this->repository->skipPresenter(true); // skip presenter pois não usamos presenter na are administrativa apenas na api
     }
 
     /**

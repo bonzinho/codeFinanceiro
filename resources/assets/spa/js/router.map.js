@@ -2,6 +2,8 @@ import LoginComponent from './components/Login.vue';
 import LogoutComponent from './components/Logout.vue';
 import DashboardComponent from './components/Dashboard.vue';
 import BankAccountListComponent from './components/bank-account/BankAccountList.vue';
+import BankAccountCreateComponent from './components/bank-account/BankAccountCreate.vue';
+import BankAccountUpdateComponent from './components/bank-account/BankAccountUpdate.vue';
 
 
 export default{
@@ -31,12 +33,15 @@ export default{
                 component: BankAccountListComponent,
                 //auth:true
             },
+            '/create':{
+                name: 'bank-account.create',
+                component: BankAccountCreateComponent
+            },
             '/:id/update':{
                 name: 'bank-account.update',
-                component: BankAccountListComponent,
-                //auth: true
+                component: BankAccountUpdateComponent
             }
         }
-    }
+    },
     
 }

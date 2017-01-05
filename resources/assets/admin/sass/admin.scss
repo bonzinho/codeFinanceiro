@@ -1,6 +1,5 @@
-
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(http://fonts.googleapis.com/icon?family=Material+Icons);
 
 //Materialize CSS
 @import "node_modules/materialize-css/sass/components/color";
@@ -14,6 +13,8 @@
 // Materialize CSS
 @import "node_modules/materialize-css/sass/materialize";
 
+@import "../../_default/sass/default";
+
 #app{
     display: flex;
     min-height: 100vh;
@@ -22,9 +23,4 @@
 
 main {
     flex: 1 0 auto
-}
-
-.bank-logo{
-    width: 22px;
-    height: 22px;
 }

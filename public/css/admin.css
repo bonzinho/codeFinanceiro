@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(http://fonts.googleapis.com/icon?family=Material+Icons);
 .materialize-red {
   background-color: #e51c23 !important; }
 
@@ -8160,6 +8160,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   .picker--time .picker__box {
     margin-bottom: 5em; } }
 
+.bank-logo {
+  width: 22px;
+  height: 22px; }
+
 #app {
   display: -webkit-box;
   display: flex;
@@ -8171,9 +8175,5 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 main {
   -webkit-box-flex: 1;
   flex: 1 0 auto; }
-
-.bank-logo {
-  width: 22px;
-  height: 22px; }
 
 /*# sourceMappingURL=admin.css.map */

@@ -17,6 +17,7 @@ export class Jwt{
 }
 
 let User = Vue.resource('user');
-let BankAccount = Vue.resource('bank_accounts'); // com o vue resource temos todas as operações put. delete update etc
+let Bank = Vue.resource('banks');
+let BankAccount = Vue.resource('bank_accounts{/id}'); // com o vue resource temos todas as operações put. delete update etc
 
-export {User, BankAccount};
+export {User, BankAccount, Bank};

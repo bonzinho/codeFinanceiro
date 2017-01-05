@@ -1,6 +1,6 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(http://fonts.googleapis.com/icon?family=Material+Icons);
 
 //Materialize CSS
 @import "node_modules/materialize-css/sass/components/color";
@@ -13,6 +13,8 @@
 
 // Materialize CSS
 @import "node_modules/materialize-css/sass/materialize";
+
+@import "../../_default/sass/default";
 
 body{
   background-color: color('green', 'lighten-5');
@@ -27,4 +29,17 @@ body{
   width: 100%;
   position: fixed;
   z-index: 998;
+}
+
+.filter-group{
+  .btn{
+    float:right;
+    height: 3rem; // 3rem 3 * tamanho do elemento html root
+    line-height: 3rem;
+
+  }
+  .filter-wrapper{
+    overflow: hidden;
+    padding-right: 10px;
+  }
 }

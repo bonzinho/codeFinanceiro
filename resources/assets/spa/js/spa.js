@@ -14,7 +14,7 @@ Vue.http.options.root = appConfig.api_url;  //variavel de configuração que vem
 require('./services/interceptors'); //importaçaao do nosso ficheiro de interceptors
 require('./router'); // ficheiro de configuração de rotas
 
-console.log(appConfig.login_url);
+//console.log(appConfig.login_url);
 
 
 

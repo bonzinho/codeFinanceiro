@@ -1,7 +1,7 @@
 <template>
     <ul class="pagination">
-        <li>
-            <a @click.prevent="setCurrentPage(currentPage - 1)" href="#"><i class="material-icons">chevron_left</i></a>
+        <li :class="{'disabled': currentPage == 0 }">
+            <a @click.prevent="previousPage" href="#"><i class="material-icons">chevron_left</i></a>
 
         </li>
 
@@ -10,8 +10,10 @@
 
         </li>
 
-        <li>
-            <a @click.prevent="setCurrentPage(currentPage + 1)" href="#"> <i class="material-icons">chevron_right</i></a>
+        <li :class="{'disabled': currentPage == pages - 1}">
+            <a @click.prevent="nextPage" href="#">
+                <i class="material-icons">chevron_right</i>
+            </a>
 
         </li>
 
@@ -43,14 +45,23 @@
         },
         methods:{
             previousPage(){
-
-            },
-            nextPage(){
-
+                if(this.currentPage > 0){
+                    this.currentPage--;
+                }
             },
             setCurrentPage(page){
                 this.currentPage = page;
 
+            },
+            nextPage(){
+                if(this.currentPage < this.pages -1){
+                    this.currentPage++;
+                }
+            },
+        },
+        watch:{ //verifica se existe alguma mudança
+            currentPage(newValue){
+                this.$dispatch('pagination::changed', newValue); // disparao evento
             }
         }
 

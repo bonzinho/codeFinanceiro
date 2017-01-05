@@ -14,6 +14,7 @@ class BankAccountsTableSeeder extends Seeder
 
         /** @var \codeFin\Repositories\BankRepository $repository */
         $repository = app(\codeFin\Repositories\BankRepository::class);
+        $repository->skipPresenter(true);
         $banks = $repository->all();
         $max = 15;
         $bankAccountId = rand(1, $max);
@@ -23,7 +24,6 @@ class BankAccountsTableSeeder extends Seeder
            ->each(function($bankAccount) use ($banks, $bankAccountId){
                 $bank = $banks->random();
                 $bankAccount->bank_id = $bank->id;
-
                 $bankAccount->save();
 
                 if ($bankAccountId == $bankAccount->id){
