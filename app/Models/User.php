@@ -33,6 +33,11 @@ class User extends Authenticatable implements JWTSubject {
         'remember_token',
     ];
 
+    public function client(){
+        //um usuario tem um tenant um para um
+        return $this->belongsTo(Client::class);
+    }
+
     public function getJWTIdentifier() {
         return $this->id;
     }

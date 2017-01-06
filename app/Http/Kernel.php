@@ -2,6 +2,7 @@
 
 namespace codeFin\Http;
 
+use codeFin\Http\Middleware\AddClientTenantMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -15,6 +16,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \codeFin\Http\Middleware\AddClientTenantMiddleware::class,  //o nosso midleware de multitentat
     ];
 
     /**

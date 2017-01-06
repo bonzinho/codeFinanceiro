@@ -10,8 +10,10 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        $this->call(ClientsTableSeeder::class); // cria os clientes para que ao criar os utilizadores já existam clientes para associar
         $this->call(UsersTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
+
     }
 
 }

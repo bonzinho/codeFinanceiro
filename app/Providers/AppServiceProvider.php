@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        //
+       /* \DB::listen(function($query){
+            echo $query->sql;
+        }); */
     }
 
     /**

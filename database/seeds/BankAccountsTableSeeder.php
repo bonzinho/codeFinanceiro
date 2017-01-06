@@ -11,29 +11,39 @@ class BankAccountsTableSeeder extends Seeder
      */
     public function run()
     {
-
-        /** @var \codeFin\Repositories\BankRepository $repository */
-        $repository = app(\codeFin\Repositories\BankRepository::class);
-        $repository->skipPresenter(true);
-        $banks = $repository->all();
-        $max = 15;
+        $banks = $this->getBanks();  //coleção de namcos
+        $clients = $this->getClients();
+        $max = 50;
         $bankAccountId = rand(1, $max);
 
         factory(\codeFin\Models\BankAccount::class, $max)
            ->make()// gera uma instancia do modelo mas nao salva no db
-           ->each(function($bankAccount) use ($banks, $bankAccountId){
+           ->each(function($bankAccount) use ($banks, $bankAccountId, $clients){
                 $bank = $banks->random();
+                $client = $clients->random();
+
                 $bankAccount->bank_id = $bank->id;
+                $bankAccount->client_id = $client->id;
                 $bankAccount->save();
 
                 if ($bankAccountId == $bankAccount->id){
                     $bankAccount->default = 1;
                     $bankAccount->save();
                 }
-
            });
+    }
 
+    private function getBanks(){
+        /** @var \codeFin\Repositories\BankRepository $repository */
+        $repository = app(\codeFin\Repositories\BankRepository::class);
+        $repository->skipPresenter(true);
+        return $repository->all();
+    }
 
-
+    private function getClients(){
+        /** @var \codeFin\Repositories\ClientRepository $repository */
+        $repository = app(\codeFin\Repositories\ClientRepository::class);
+        $repository->skipPresenter(true);
+        return $repository->all();
     }
 }

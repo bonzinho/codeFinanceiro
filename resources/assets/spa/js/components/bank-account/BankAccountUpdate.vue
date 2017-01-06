@@ -21,7 +21,6 @@
                     bank_id: '',
                     'default': false,
                },
-               bank_name: '',
                banks: [],
             };
         },

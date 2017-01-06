@@ -23,10 +23,9 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\codeFin\Repositories\MyModelRepository::class, \codeFin\Repositories\MyModelRepositoryEloquent::class);
         $this->app->bind(\codeFin\Repositories\BankRepository::class, \codeFin\Repositories\BankRepositoryEloquent::class);
         $this->app->bind(\codeFin\Repositories\BankAccountRepository::class, \codeFin\Repositories\BankAccountRepositoryEloquent::class);
-        $this->app->bind(\codeFin\Repositories\BankAccountRepository::class, \codeFin\Repositories\BankAccountRepositoryEloquent::class);
+        $this->app->bind(\codeFin\Repositories\ClientRepository::class, \codeFin\Repositories\ClientRepositoryEloquent::class);
         //:end-bindings:
     }
 }
