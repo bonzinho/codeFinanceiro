@@ -29,7 +29,7 @@
                             <option value="" disable selected>Escolha um banco</option>
                             <option v-for="o in banks" :value="o.id">{{ o.name }}</option>
                         </select> -->
-                        <input type="text" v-model="bankAccount.bank.data.name" placerholder="Procurar banco" id="bank-id"
+                        <input type="text" :value="bank.name" placerholder="Procurar banco" id="bank-id"
                         autocomplete="off" data-activates="bank-id-dropdown" data-beloworigin="true"/>
                         <ul id="bank-id-dropdown" class="dropdown-content ac-dropdown"></ul>
                     </div>

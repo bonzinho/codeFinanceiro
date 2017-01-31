@@ -21,6 +21,7 @@ Route::group(['middleware' => 'cors', 'as' => 'api.'], function(){
     Route::group(['middleware' => 'auth:api'], function(){
         Route::resource('banks', 'Api\BanksController', ['only' => ['index']]);
         Route::resource('bank_accounts', 'Api\BankAccountsController', ['except' => ['create', 'edit']]); // cria todas as rotas necessarias de forma automatica o except faz com que não crie as rotas definidas nele, neste caso crete e edit
+        Route::resource('categories', 'Api\CategoriesController', ['except' => ['create', 'edit']]); // cria todas as rotas necessarias de forma automatica o except faz com que não crie as rotas definidas nele, neste caso crete e edit
         Route::post('logout', 'Api\AuthController@logout')->middleware('auth:api')->name('logout');
         Route::get('/user', function(Request $request){
             $user = $request->user('api');  // aqui é necessario defnir o guardiao, neste caso api, se não for definido usa o web, faz com que use cookies em vez de localstore

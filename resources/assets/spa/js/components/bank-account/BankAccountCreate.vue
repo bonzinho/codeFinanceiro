@@ -20,6 +20,9 @@
                     account: '',
                     'default': false,
                },
+               bank: {
+                    name:""
+               },
                banks: [],
             };
         },

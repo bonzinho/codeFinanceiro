@@ -21,6 +21,9 @@
                     bank_id: '',
                     'default': false,
                },
+               bank: {
+                    name:""
+               },
                banks: [],
             };
         },
@@ -43,8 +46,12 @@
                 })
             },
             getBanksAccount(id, availableIncludes){
-                BankAccount.get({id: id, include: availableIncludes}).then((response) => {
+                BankAccount.get({
+                    id: id,
+                    include: 'bank'
+                }).then((response) => {
                     this.bankAccount = response.data.data;
+                    this.bank = response.data.data.bank.data;
                 })
             },
             initAutocomplete(){  // autocomplete configurações

@@ -8,7 +8,6 @@
         <title>Code Financeiro - Code Education</title>
         <!-- Styles -->
         <link href=" {{ asset('css/spa.css')}}" rel="stylesheet">
-        
     </head>
     <body>
         <app></app>

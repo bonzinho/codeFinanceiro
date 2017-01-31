@@ -46,3 +46,10 @@ $factory->define(\codeFin\Models\Client::class, function (Faker\Generator $faker
         'name' => $faker->name,
     ];
 });
+
+$factory->define(\codeFin\Models\Category::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->name,
+    ];
+});

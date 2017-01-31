@@ -4,6 +4,7 @@ import DashboardComponent from './components/Dashboard.vue';
 import BankAccountListComponent from './components/bank-account/BankAccountList.vue';
 import BankAccountCreateComponent from './components/bank-account/BankAccountCreate.vue';
 import BankAccountUpdateComponent from './components/bank-account/BankAccountUpdate.vue';
+import CategoryListComponent from './components/category/CategoryList.vue';
 
 
 export default{
@@ -12,7 +13,6 @@ export default{
         component: LoginComponent,
         auth: false // para acessar a esta rota NÂO È necessario estar autenticado      
     },
-
     '/logout':{
         name: 'auth.logout',
         component: LogoutComponent,
@@ -24,24 +24,30 @@ export default{
         component: DashboardComponent,
         auth: true // para acessar a esta rota É necessario estar autenticado       
     },
-
     '/bank-accounts': {
         component:{template: "<router-view></router-view>"},
         subRoutes:{
             '/':{
                 name:'bank-account.list',
                 component: BankAccountListComponent,
-                //auth:true
+                auth:true
             },
             '/create':{
                 name: 'bank-account.create',
-                component: BankAccountCreateComponent
+                component: BankAccountCreateComponent,
+                auth: true,
             },
             '/:id/update':{
                 name: 'bank-account.update',
-                component: BankAccountUpdateComponent
+                component: BankAccountUpdateComponent,
+                auth: true,
             }
         }
     },
+    '/categories':{
+        name: 'category.list',
+        component: CategoryListComponent,
+        auth: true,
+    }
     
 }
