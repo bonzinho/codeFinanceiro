@@ -19,7 +19,7 @@
                 </ul>
                 <span class="valign">{{{ categoryText(o) }}}</span>
             </div>
-            <category-tree :categories="o.children.data"></category-tree>
+            <category-tree :categories="o.children.data" :parent="o"></category-tree>
         </li>
     </ul>
 </template>
@@ -32,7 +32,14 @@
             categories:{
                 type: Array,
                 required: true
-            }
+            },
+            parent: {
+                type: Object,
+                required: false,
+                'default' (){
+                    return null; // caso o parent não seja passado o valor padrão é null
+                }
+            },
         },
         watch:{
             categories: {
@@ -62,7 +69,7 @@
                 this.$dispatch('category-new', category);
             },
             categoryEdit(category){
-                this.$dispatch('category-edit', category);
+                this.$dispatch('category-edit', category, this.parent);
             }
         }
     }

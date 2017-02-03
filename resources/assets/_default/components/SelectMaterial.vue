@@ -13,8 +13,6 @@
 
             },
             selected:{
-                //type: [String, Number],
-                //required:true,
                 // alteramos o type e o required para o seguinte validator, para as categorias pai mostrarem a afrase "sem categoria pai", pois este têm o level como null
                 validator(value){
                     return typeof value == 'string' || typeof  value == 'number' || value === null;
@@ -28,6 +26,9 @@
                     .on('change', function(){
                         if(parseInt(this.value, 10) !== 0){
                             self.selected = this.value; // ao selecionarmos alteramos logo o nosso selected
+                        }else{
+                            // se o value for = 0, ou seja quisemos alterar a categoria filha para uma categoria pai
+                            self.selected = null;
                         }
                     })
             $(this.$el).val(this.selected !== null ? this.selected :0).trigger('change');
@@ -35,8 +36,9 @@
         watch: {
             //propriedade que vai ter a coleção dasw informações necessarias
             'options.data'(data){
+                $(this.$el).empty();
                 //faz um merge das opções existentes (this.options em cima) com as novas
-                $(this.$el).select2(Object.assign({}, this.options, {data: data}));
+                $(this.$el).select2(this.options);
             },
             // selecionar a categoria pai predefinida aquando abrir o modal
             'selected'(selected){

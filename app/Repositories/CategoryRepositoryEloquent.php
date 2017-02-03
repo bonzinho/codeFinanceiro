@@ -22,6 +22,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
      */
     public function create(array $attributes)
     {
+        Category::$enableTenant = false; // desablita o multitanacy para criar categorias pai com profundidade 0
         if (isset($attributes['parent_id'])){
             // incluir uam categora filha (criar)
             $skipPresenter  = $this->skipPresenter;
@@ -29,11 +30,13 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
             $parent = $this->find($attributes['parent_id']); // pega ainstancia do eloquent
             $this->skipPresenter = $skipPresenter;
             $child = $parent->children()->create($attributes);
-            return $this->parserResult($child);
+            $result =  $this->parserResult($child);
         }else{
             //incluir uma categoria pai
-            return parent::create($attributes);
+            $result =  parent::create($attributes);
         }
+        Category::$enableTenant = true; // volta a ativar o multitanacy depois de criar a categoria pai com a profundidade 0
+        return $result;
     }
 
     /**
@@ -43,19 +46,24 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
      */
     public function update(array $attributes, $id)
     {
+        Category::$enableTenant = false; // volta a ativar o multitanacy depois de criar a categoria pai com a profundidade 0
         if (isset($attributes['parent_id'])){  // se o parent id existir
             // incluir uam categora filha (criar)
             $skipPresenter  = $this->skipPresenter;
             $this->skipPresenter('true');
             $child = $this->find($id); // pega ainstancia do eloquent
             $child->parent_id = $attributes['parent_id'];
+            $child->fill($attributes);
             $child->save();
             $this->skipPresenter = $skipPresenter;
-            return $this->parserResult($child);
+            $result =  $this->parserResult($child);
         }else{
             //incluir uma categoria pai
-            return parent::update($attributes);
+            $result =  parent::update($attributes, $id);
+            $result->makeRoot()->save();
         }
+        Category::$enableTenant = true; // volta a ativar o multitanacy depois de criar a categoria pai com a profundidade 0
+        return $result;
     }
 
 

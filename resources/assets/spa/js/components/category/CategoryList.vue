@@ -15,7 +15,7 @@
                 <span slot="title">{{title}}</span>
                 <div slot="footer">
                     <button type="submit" class="btn btn-flat waves-effect green lighten-2 modal-close modal-action">OK</button>
-                    <button class="btn btn-flat waves-effect waves-red modal-close modal-action">Cancelar</button>
+                    <button type="button" class="btn btn-flat waves-effect waves-red modal-close modal-action">Cancelar</button>
                 </div>
             </category-save>
             <div class="fixed-action-btn">
@@ -50,6 +50,7 @@
                     name: '',
                     parent_id: 0,
                 },
+                category: null,
                 parent: null,
                 title: '',
                 modalOptionSave: {
@@ -87,8 +88,12 @@
                 })
             },
             saveCategory(){
-                CategoryService.new(this.categorySave, this.parent, this.categories).then(response =>{
-                    Materialize.toast('categoria adicionada com sucesso', 4000);
+                CategoryService.save(this.categorySave, this.parent, this.categories, this.category).then(response =>{
+                    if(this.categorySave.id === 0){
+                        Materialize.toast('categoria adicionada com sucesso', 4000);
+                    }else{
+                        Materialize.toast('categoria alterada com sucesso', 4000);
+                    }
                     this.resetScope();
                 });
             },
@@ -102,8 +107,16 @@
                 this.parent = category;
                 $(`#${this.modalOptionSave.id}`).modal('open');  // faz abir o modal com a informação com o id correto
             },
-            modalEdit(category){
-                //this.categorySave = category;
+            modalEdit(category, parent){
+                this.title = 'Editar categoria'
+                this.categorySave = {
+                    id: category.id,  // id categoria que estamos a editar
+                    name: category.name,
+                    parent_id: category.parent_id,
+                };
+                this.category = category;
+                this.parent = parent;
+                $(`#${this.modalOptionSave.id}`).modal('open');  // faz abir o modal com a informação com o id correto
             },
             formatCategories(){
                 this.categoriesFormatted = CategoryFormat.getCategoriesFormatted(this.categories);
@@ -116,6 +129,7 @@
                     name: '',
                     parent_id: 0,
                 };
+                this.category = null;
                 this.parent = null;
                 this.formatCategories(); // cama novamente o nosso formatCategories para ter uma coleçao de categorias formatada
             },
@@ -124,8 +138,8 @@
             'category-new'(category){
                 this.modalNew(category);
             },
-            'category-edit'(category){
-                //this.modalEdit(category);
+            'category-edit'(category, parent){  // recebemos a categoria e o parent da categori se existir
+                this.modalEdit(category, parent);
             },
         }
     }
