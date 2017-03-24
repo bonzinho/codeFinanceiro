@@ -1,13 +1,12 @@
 
-import LocalStorage from './services/localStorage';
 import appConfig from './services/appConfig';  // importação do nosso ficheiro de configuração mesclado com o ficheiro de configuração atuomatico
-
-
-
+//import Vuex from 'vuex';
 
 require('materialize-css'); //load do css do materialize
 window.Vue = require('vue');
+//window.Vue.use(Vuex);
 require('vue-resource');
+require('vuex');
 Vue.http.options.root = appConfig.api_url;  //variavel de configuração que vem do ficheiro ./services/appConfig
 
 

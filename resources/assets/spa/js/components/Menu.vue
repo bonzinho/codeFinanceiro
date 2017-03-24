@@ -42,7 +42,7 @@
 </template>
 
 <script type="text/javascript">
-    import Auth from '../services/auth';
+    import store from '../store';
     export default {
         data(){
             return {
@@ -59,13 +59,11 @@
                     }
                 ],
                 menusDropdown:[],
-                user: Auth.user,
-                logout: Auth.logout,
             }
         },
         computed:{
             name(){
-                return this.user.data ? this.user.data.name : '';
+                return store.state.user.name;
             }
         },
         ready() {

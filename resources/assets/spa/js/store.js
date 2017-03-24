@@ -1,9 +1,43 @@
-import JwtToken from './jwt-token';
-import LocalStorage from './localStorage';  // importar o ficheiro do localstorage para o gerir
-import {User} from '../services/resources';
+import JwtToken from './services/jwt-token';
+import LocalStorage from './services/localStorage';  // importar o ficheiro do localstorage para o gerir
+import {User} from './services/resources';
+import Vuex from 'vuex'; //instancia do vuex com o vu.js
 
 const USER = 'user'; // valor que vai ser guardado no local storage
 
+const state = {
+    user: LocalStorage.getObject(USER) || {name: ''},
+    check: JwtToken.token != null
+};
+
+const mutations = {
+    setUser(state, user){ //acedemos à constante state
+      state.user = user;
+      LocalStorage.setObject(USER, user);
+    },
+    authenticated(state){
+      state.check = true;
+    }
+
+};
+
+const actions = {
+    login(context, {email, password}){  //context é a instancia do proprio store
+        return JwtToken.accessToken(email, password).then((response) =>{ // executa o ajax
+            context.commit('authenticated');
+            context.dispatch('getUser');
+            return response;
+        });
+    },
+    getUser(context){
+        return User.get().then((response) => {
+                context.commit('setUser', response.data);
+            });
+    }
+};
+
+export default new Vuex.Store({state, mutations, actions});
+/*
 const afterLogin = function(response){  //esta constante serve para guardar a função de configuração do que aontece depois do login ser feito
     this.user.check = true;
     User.get()
@@ -20,11 +54,11 @@ export default{
                 return;
             }
             this._data = value;
-            LocalStorage.setObject(USER, value);
+            LocalStorage.setObject(User, value);
         },
         get data(){
             if(!this._data){
-                this._data = LocalStorage.getObject(USER);
+                this._data = LocalStorage.getObject(User);
             }
             return this._data;
         },
@@ -51,4 +85,4 @@ export default{
         this.user.data = null;
         this.user.check = false;
     }
-}
+} */

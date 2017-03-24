@@ -86,7 +86,7 @@ export class CategoryService{
                 }
             }else{ // se a nossa categoria tiver categoria pai
                 /*
-                 * Categoria alterada, e tem um pai
+                 * Categoria alterada, se tem um pai
                  */
                 if(parent){
                     /*
@@ -129,6 +129,17 @@ export class CategoryService{
         })
     }
 
+    static destroy(category, parent, categories){
+        return Category.delete({id: category.id}).then(response => {
+            if(parent){
+                parent.children.data.$remove(category);
+            }else{
+                categories.$remove(category)
+            }
+            return response;
+        });
+    }
+
     static _addchild(child, categories){
         let parent = this._findParent(child.parent_id, categories);
         parent.children.data.push(child);
@@ -136,7 +147,6 @@ export class CategoryService{
 
     static _findParent(id, categories){
         let result = null;
-
         for(let category of categories){
             if(id == category.id){
                 result = category;
