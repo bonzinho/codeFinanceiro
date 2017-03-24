@@ -1,5 +1,5 @@
 import JwtToken from './jwt-token';
-import Auth from './auth';
+import store from '../store/store';
 import appConfig from './appConfig';
 
 
@@ -19,7 +19,7 @@ Vue.http.interceptors.push((request, next) =>{
                     return Vue.http(request);  // caso o refresh tenha sido feito com sucesso, retorna a RESPONSE ORIGINAL para que faça o que o utilizador pediu
                 })
                 .catch(() => {
-                    Auth.clearAuth(); // limpa o token do localstorage metodo do auth.js
+                    store.dispatch('logout'); // limpa o token do localstorage metodo do auth.js
                     window.location.href = appConfig.login_url
                 }); // redireciona para o login, caso o token tenha expirado (2 semanas)
         }

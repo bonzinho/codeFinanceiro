@@ -29,16 +29,16 @@
 
 <script type="text/javascript">
     import MenuComponent from './Menu.vue';
-    import store from '../store';
+    import store from '../store/store';
     export default {
-        components:{
+        components: {
             'menu': MenuComponent
         },
         created(){
-          window.Vue.http.interceptors.unshift((request, next) => {
-              this.loading = true;// se houver um requesição torna o loading true
-              next(()=> this.loading = false); // depois de haver uam requesição seta o loadin a false
-          });
+            window.Vue.http.interceptors.unshift((request, next) => {
+                this.loading = true;// se houver um requesição torna o loading true
+                next(() => this.loading = false); // depois de haver uam requesição seta o loadin a false
+            });
         },
         data(){
             return {
@@ -48,13 +48,13 @@
         },
         computed: {
             isAuth(){
-                return store.state.check;
+                return store.state.auth.check; // verifica se está autenticado na nossa fonte da verdade (store.js)
             },
             showMenu(){
                 return this.isAuth && this.$route.name != 'auth.login';
             }
         }
-        
+
     };
 </script>
 

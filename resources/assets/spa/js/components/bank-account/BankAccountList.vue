@@ -80,7 +80,7 @@
     import PaginationComponent from '../Pagination.vue';
     import PageTitleComponent from '../../../../_default/components/PageTitle.vue';
     import SearchComponent from '../../../../_default/components/search.vue';
-
+    import store from '../../store/store';
     export default{
         components:{
             'modal': ModalComponent,
@@ -155,18 +155,16 @@
                 this.bankAccountToDelete = bankAccount;
                 $('#modal-delete').modal('open');
             },
-            getBankAccounts(availableIncludes){
-                BankAccount.query({
-                    page: this.pagination.current_page + 1,
-                    orderBy: this.order.key,
-                    sortedBy: this.order.sort,
-                    search: this.search,
-                    include: availableIncludes
+            getBankAccounts(){
+                store.dispatch('query', {
+                    pagination: this.pagination,
+                    order: this.order,
+                    search: this.search
                 }).then((response) => {
-                    this.bankAccounts = response.data.data;  //data.data por causa do fractal
+                    /*this.bankAccounts = response.data.data;  //data.data por causa do fractal
                     let pagination = response.data.meta.pagination;
                     pagination.current_page--; // para subtrair 1 ao valor e ficar certo com a posição do array
-                    this.pagination = pagination; //dados do meta vindos do jason, (verificar postman)
+                    this.pagination = pagination; //dados do meta vindos do jason, (verificar postman) */
                 });
             },
             sortBy(key){

@@ -42,8 +42,7 @@
 </template>
 
 <script type="text/javascript">
-//import Auth from '../services/auth';
-import store from '../store';
+    import store from '../store/store';
 
     export default{
         data(){
@@ -61,20 +60,20 @@ import store from '../store';
         methods: {
             login(){
                 store.dispatch('login', this.user) // ('login') e o nome da acção que vem o nosso store.js
-                    .then(()=>this.$router.go({name: 'dashboard'})) // se for válido
-                    .catch((responseError) => { //se não for válido verifica qual o código e apresenta a mensage que quermos no error.message
-                        switch (responseError.status){ // verifica qual o codigo retornado, se for 401 as credenciais não sao as corretas
-                            case 401:
-                                this.error.message = responseError.data.message;
-                                break;
+                        .then(() => this.$router.go({name: 'dashboard'})) // se for válido
+                        .catch((responseError) => { //se não for válido verifica qual o código e apresenta a mensage que quermos no error.message
+                            switch (responseError.status) { // verifica qual o codigo retornado, se for 401 as credenciais não sao as corretas
+                                case 401:
+                                    this.error.message = responseError.data.message;
+                                    break;
 
-                            default: // um outro codigo de erro aparece uam mensagem padrao
-                                this.error.message = "Login failed!!";
-                                //console.log(responseError.status);
-                                break;
-                        }
-                        this.error.error = true;  // passa o error.erro para true para parecer a div de erro
-                    });
+                                default: // um outro codigo de erro aparece uam mensagem padrao
+                                    this.error.message = "Login failed!!";
+                                    //console.log(responseError.status);
+                                    break;
+                            }
+                            this.error.error = true;  // passa o error.erro para true para parecer a div de erro
+                        });
             }
         }
     }

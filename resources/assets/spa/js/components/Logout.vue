@@ -12,19 +12,19 @@
 </template>
 
 <script type="text/javascript">
-import Auth from '../services/auth';
+    import store from '../store/store';
     export default{
         ready(){
-            setTimeout( () => {  // função deposis de a pagina estar carregada espera 1seg e envia para o logout
+            setTimeout(() => {  // função deposis de a pagina estar carregada espera 1seg e envia para o logout
                 this.logout();
             }, 1000);
         },
         methods: {
             logout(){
-               let goToLogin = () => this.$router.go({name: 'auth.login'})
-               Auth.logout()
-                    .then(goToLogin)
-                    .catch(goToLogin);
+                let goToLogin = () => this.$router.go({name: 'auth.login'})
+                store.dispatch('logout')
+                        .then(goToLogin)
+                        .catch(goToLogin);
             }
         }
     }
